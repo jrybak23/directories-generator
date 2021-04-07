@@ -1,0 +1,13 @@
+.result-preview-item:not(:nth-last-child(1)):not(:nth-last-child(2)):not(:nth-last-child(3)) {
+  @apply border-b-2;
+}
+
+.result-preview-item:not(:nth-child(3n)) {
+  @apply border-r-2;
+}
+
+.result-preview-item:nth-child(3n):nth-last-child(2),
+.result-preview-item:nth-child(3n-1):nth-last-child(3),
+.result-preview-item:nth-child(3n):nth-last-child(3){
+  @apply border-b-2;
+}
