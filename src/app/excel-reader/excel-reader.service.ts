@@ -12,7 +12,7 @@ interface ExcelRange {
   providedIn: 'root'
 })
 export class ExcelReaderService {
-
+  private REGEX = RegExp('([A-Z]+)([0-9]+):([A-Z]+)([0-9]+)');
   private workbook: Workbook | null = null;
 
   constructor() {
@@ -44,29 +44,29 @@ export class ExcelReaderService {
 
   private parseRange(range: string): ExcelRange {
     range = range.trim();
-    const beginX = this.parseFromLetter(range, 0);
-    const beginY = this.parseFromNumber(range, 1);
-    const endX = this.parseFromLetter(range, 3);
-    const endY = this.parseFromNumber(range, 4);
+
+    const regexGroups = this.REGEX.exec(range);
+
+    if (!regexGroups) {
+      throw new Error(`Unable to parse the range ${range}. Please input range e.g A2:A11`);
+    }
+
+    // @ts-ignore
+    const beginX = this.parseFromLetters(regexGroups[1]);
+    // @ts-ignore
+    const beginY = parseInt(regexGroups[2], 10);
+    // @ts-ignore
+    const endX = this.parseFromLetters(regexGroups[3]);
+    // @ts-ignore
+    const endY = parseInt(regexGroups[4], 10);
 
     return {beginX, beginY, endX, endY};
   }
 
-  private parseFromLetter(range: string, charIndex: number): number {
-    const ALetterCharCodeOffset = 64;
-    const result = range.charCodeAt(charIndex) - ALetterCharCodeOffset;
-    if (!result) {
-      throw new Error(`Unable to parse the letter in the range ${range}`);
-    }
-    return result;
-  }
-
-  private parseFromNumber(range: string, charIndex: number): number {
-    const result = parseInt(range.charAt(charIndex), 10);
-    if (!result) {
-      throw new Error(`Unable to parse the number in the range ${range}`);
-    }
-    return result;
+  private parseFromLetters(letters: string): number {
+    const column = this.workbook?.getWorksheet(1).getColumn(letters);
+    // @ts-ignore
+    return column?.number;
   }
 
   private readItemsFromWorksheet(worksheet: Worksheet, range: ExcelRange): string[] {

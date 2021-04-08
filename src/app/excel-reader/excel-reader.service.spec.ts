@@ -17,10 +17,10 @@ describe('ExcelReaderService', () => {
 
     // Act
     await service.loadWorkbook(buffer);
-    const items = service.readItems(1, 'A2:C4');
+    const items = service.readItems(1, 'A2:B11');
 
     // Assert
-    expect(items).toEqual(['v21', 'v22', 'v31', 'v41', 'v42']);
+    expect(items).toEqual(['v21', 'v22', 'v31', 'v41', 'v42', 'v51', 'v61', 'v71', 'v91', 'v11_1']);
   });
 
   it('should auto determine range from the file', async () => {
@@ -33,6 +33,6 @@ describe('ExcelReaderService', () => {
     const range = service.autoDetermineRange();
 
     // Assert
-    expect(range).toEqual('A1:A5');
+    expect(range).toEqual('A1:A11');
   });
 });
