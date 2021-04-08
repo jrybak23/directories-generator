@@ -3,10 +3,12 @@
     <input type="file" id="file-input" (change)="inputFile($event)" class="w-56">
     <input type="text" class="rounded-xl" placeholder="input range e.g A2:A11" *ngIf="isFileChosen"
            [(ngModel)]="range" (input)="reloadItems($event)">
-    <button *ngIf="items.length" type="button" class="ml-4 download-button" (click)="downloadFile()">Download ZIP file</button>
+    <button *ngIf="items.length" type="button" class="ml-4 download-button" (click)="downloadFile()">
+      <i class="fas fa-file-download"></i> Download ZIP file
+    </button>
   </div>
   <ul class="grid grid-cols-3 m-10 border-2 rounded-xl bg-gray-100 shadow">
-    <li *ngFor="let item of items" class="p-2 result-preview-item">{{item}}</li>
+    <li *ngFor="let item of items" class="p-2 result-preview-item"><i class="fas fa-folder"></i> {{item}}</li>
     <div class="col-span-full text-center m-4 text-xl" *ngIf="!items.length">{{message}}</div>
   </ul>
 </div>
