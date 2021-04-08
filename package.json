@@ -22,6 +22,8 @@
     "@angular/router": "~11.2.8",
     "@ngneat/tailwind": "^6.0.3",
     "exceljs": "^4.2.1",
+    "file-saver": "^2.0.5",
+    "jszip": "^3.6.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"
@@ -32,6 +34,7 @@
     "@angular/cli": "~11.2.7",
     "@angular/compiler-cli": "~11.2.8",
     "@tailwindcss/forms": "0.3.2",
+    "@types/file-saver": "^2.0.1",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",

@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ExcelReaderService} from '../excel-reader/excel-reader.service';
+import {ArchiveService} from '../archive/archive.service';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,8 @@ export class HomeComponent implements OnInit {
   range = '';
   message = 'No file is chosen. Choose *.xlsx file.';
 
-  constructor(private excelReader: ExcelReaderService) {
+  constructor(private excelReader: ExcelReaderService,
+              private archiveService: ArchiveService) {
   }
 
   ngOnInit(): void {
@@ -49,5 +51,9 @@ export class HomeComponent implements OnInit {
         this.items = this.excelReader.readItems(1, range);
       });
     }
+  }
+
+  downloadFile(): void {
+    this.archiveService.downloadAsFoldersInZip(this.items);
   }
 }

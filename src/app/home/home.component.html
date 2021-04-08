@@ -1,8 +1,9 @@
 <div class="container mx-auto border-l border-r shadow-xl min-h-screen max-w-screen-lg bg-white">
   <div class="border-b-2 shadow bg-gray-100 pl-2 h-14 flex align-middle items-center">
-    <input type="file" id="file-input" (change)="inputFile($event)">
-    <input type="text" class="rounded" placeholder="input range e.g A2:A11" *ngIf="isFileChosen"
+    <input type="file" id="file-input" (change)="inputFile($event)" class="w-56">
+    <input type="text" class="rounded-xl" placeholder="input range e.g A2:A11" *ngIf="isFileChosen"
            [(ngModel)]="range" (input)="reloadItems($event)">
+    <button *ngIf="items.length" type="button" class="ml-4 download-button" (click)="downloadFile()">Download ZIP file</button>
   </div>
   <ul class="grid grid-cols-3 m-10 border-2 rounded-xl bg-gray-100 shadow">
     <li *ngFor="let item of items" class="p-2 result-preview-item">{{item}}</li>
